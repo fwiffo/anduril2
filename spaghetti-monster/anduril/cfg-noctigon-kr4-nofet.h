@@ -62,3 +62,4 @@
 #undef MIN_THERM_STEPDOWN
 #define MIN_THERM_STEPDOWN 80  // must be > end of dynamic PWM range
 
+#include "config-fwiffo.h"
