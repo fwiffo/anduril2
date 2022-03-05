@@ -318,6 +318,9 @@ void update_tint() {
     #endif
     // stretch 1-254 to fit 0-255 range (hits every value except 98 and 198)
     else { mytint = (tint * 100 / 99) - 1; }
+    #ifdef CUSTOM_AUTORAMP_CURVE
+    if (tint == 0 || tint == 255) { mytint = autoramp_curve[mytint]; }
+    #endif
 
     PWM_DATATYPE2 base_PWM = brightness;
     #if defined(TINT_RAMPING_CORRECTION) && (TINT_RAMPING_CORRECTION > 0)

@@ -33,6 +33,9 @@ uint8_t tint = 0;
 uint8_t tint = 128;
 #endif
 #define USE_TRIANGLE_WAVE
+#ifdef CUSTOM_AUTORAMP_CURVE
+const uint8_t autoramp_curve[] = { CUSTOM_AUTORAMP_CURVE };
+#endif
 #endif
 
 #ifdef USE_SET_LEVEL_GRADUALLY
