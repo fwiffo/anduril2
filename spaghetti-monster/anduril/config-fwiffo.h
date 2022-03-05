@@ -35,7 +35,11 @@
 #ifdef STROBE_BRIGHTNESS
 #undef STROBE_BRIGHTNESS
 #endif
+#ifdef DEFAULT_BIKING_LEVEL
+#undef DEFAULT_BIKING_LEVEL
+#endif
 #define STROBE_BRIGHTNESS RAMP_DISCRETE_CEIL / 3
+#define DEFAULT_BIKING_LEVEL RAMP_DISCRETE_CEIL / 3
 
 // Default ramp style: 0 = smooth, 1 = stepped
 #ifdef RAMP_STYLE
