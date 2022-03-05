@@ -21,6 +21,7 @@ script to generate a simple gamma curve.
  - Disables party and tactical strobes and reduces default strobe brightness
  - Defaults to stepped ramping with 5 steps
  - Sets the default ramping floor (moonlight) to the lowest possible level
+ - Disables ramp after moonlight
  - Sets manual ramp memory to middle brightness
  - Defaults AUX LEDs to battery mode and low brightness in OFF and LOCKOUT
  - Applies 0.5 gamma to tint autoramp curve to make middle levels cooler
