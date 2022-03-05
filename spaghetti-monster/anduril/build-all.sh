@@ -32,9 +32,14 @@ for TARGET in cfg-*.h ; do
   ATTINY=$(grep 'ATTINY:' $TARGET | awk '{ print $3 }')
   if [ -z "$ATTINY" ]; then ATTINY=85 ; fi
 
+  if [ "$ATTINY" = "1616" ]; then
+    echo "Skipping attiny1616 firmware..."
+    continue
+  fi
+
   # try to compile
-  echo ../../../bin/build.sh $ATTINY "$UI" "-DCONFIGFILE=${TARGET}"
-  ../../../bin/build.sh $ATTINY "$UI" "-DCONFIGFILE=${TARGET}"
+  echo ../../bin/build.sh $ATTINY "$UI" "-DCONFIGFILE=${TARGET}"
+  ../../bin/build.sh $ATTINY "$UI" "-DCONFIGFILE=${TARGET}"
 
   # track result, and rename compiled files
   if [ 0 = $? ] ; then
