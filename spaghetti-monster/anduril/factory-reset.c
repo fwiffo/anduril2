@@ -45,7 +45,10 @@ void factory_reset() {
     if (reset) {
         #if defined(USE_THERMAL_REGULATION) && defined(USE_THERM_AUTOCALIBRATE)
         // auto-calibrate temperature...  assume current temperature is 21 C
-        thermal_config_save(1, 21);
+        #ifndef THERM_AUTOCALIBRATE_TEMP
+        #define THERM_AUTOCALIBRATE_TEMP 21
+        #endif
+        thermal_config_save(1, THERM_AUTOCALIBRATE_TEMP);
         #endif
         // save all settings to eeprom
         // (assuming they're all at default because we haven't loaded them yet)
