@@ -566,6 +566,9 @@ void globals_config_save(uint8_t step, uint8_t value) {
     #ifdef USE_JUMP_START
     else if (step == 1+jump_start_config_step) { jump_start_level = value; }
     #endif
+    #ifdef USE_EXTRA_LOW_MOON_CONFIG
+    else if (step == 1+extra_low_moon_config_step) { use_extra_low_moon = !(!(value)); }
+    #endif
 }
 
 uint8_t globals_config_state(Event event, uint16_t arg) {

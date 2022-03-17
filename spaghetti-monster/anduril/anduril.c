@@ -149,6 +149,10 @@
 #include "sos-mode.h"
 #endif
 
+#ifdef USE_EXTRA_LOW_MOON_CONFIG
+#include "extra-low-moon-mode.h"
+#endif
+
 
 /********* Include all the app logic source files *********/
 // (is a bit weird to do things this way,
@@ -203,6 +207,10 @@
 
 #ifdef USE_SOS_MODE
 #include "sos-mode.c"
+#endif
+
+#ifdef USE_EXTRA_LOW_MOON_CONFIG
+#include "extra-low-moon-mode.c"
 #endif
 
 

@@ -160,22 +160,26 @@ int main() {
         // enter standby mode if requested
         // (works better if deferred like this)
         if (go_to_standby) {
-            #ifdef USE_RAMPING
-            set_level(0);
-            #else
-            #if PWM_CHANNELS >= 1
-            PWM1_LVL = 0;
-            #endif
-            #if PWM_CHANNELS >= 2
-            PWM2_LVL = 0;
-            #endif
-            #if PWM_CHANNELS >= 3
-            PWM3_LVL = 0;
-            #endif
-            #if PWM_CHANNELS >= 4
-            PWM4_LVL = 255;  // inverted  :(
-            #endif
-            #endif
+            if (skip_power_off_on_standby) {
+                skip_power_off_on_standby = 0;
+            } else {
+                #ifdef USE_RAMPING
+                set_level(0);
+                #else
+                #if PWM_CHANNELS >= 1
+                PWM1_LVL = 0;
+                #endif
+                #if PWM_CHANNELS >= 2
+                PWM2_LVL = 0;
+                #endif
+                #if PWM_CHANNELS >= 3
+                PWM3_LVL = 0;
+                #endif
+                #if PWM_CHANNELS >= 4
+                PWM4_LVL = 255;  // inverted  :(
+                #endif
+                #endif
+            }
             standby_mode();
         }
 

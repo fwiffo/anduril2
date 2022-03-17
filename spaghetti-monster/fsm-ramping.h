@@ -103,6 +103,13 @@ PROGMEM const PWM_DATATYPE pwm_tops[] = { PWM_TOPS };
 uint8_t jump_start_level = DEFAULT_JUMP_START_LEVEL;
 #endif
 
+#ifdef USE_EXTRA_LOW_MOON_CONFIG
+#ifndef DEFAULT_USE_EXTRA_LOW_MOON
+#define DEFAULT_USE_EXTRA_LOW_MOON 0
+#endif
+uint8_t use_extra_low_moon = DEFAULT_USE_EXTRA_LOW_MOON;
+#endif
+
 // default / example ramps
 #ifndef PWM1_LEVELS
 #if PWM_CHANNELS == 1

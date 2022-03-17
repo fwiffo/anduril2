@@ -104,6 +104,14 @@ uint8_t off_state(Event event, uint16_t arg) {
         } else
         #endif
         #else  // B_RELEASE_T or B_TIMEOUT_T
+        #ifdef USE_EXTRA_LOW_MOON_CONFIG
+        if (use_extra_low_moon) {
+            set_state(extra_low_moon_state, 1);
+            // Extra-low moon is not compatible with ramping after moon or
+            // doing anything else because it enters standby.
+            return MISCHIEF_MANAGED;
+        }
+        #endif
         set_level(nearest_level(1));
         #endif
         #ifdef USE_RAMP_AFTER_MOON_CONFIG
@@ -121,6 +129,14 @@ uint8_t off_state(Event event, uint16_t arg) {
     }
     // hold, release quickly: go to lowest level (floor)
     else if (event == EV_click1_hold_release) {
+        #ifdef USE_EXTRA_LOW_MOON_CONFIG
+        if (use_extra_low_moon) {
+            set_state(extra_low_moon_state, 1);
+            // Extra-low moon is not compatible with ramping after moon or
+            // doing anything else because it enters standby.
+            return MISCHIEF_MANAGED;
+        }
+        #endif
         set_state(steady_state, 1);
         return MISCHIEF_MANAGED;
     }

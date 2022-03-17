@@ -65,6 +65,9 @@ typedef enum {
     #ifdef USE_JUMP_START
         jump_start_level_e,
     #endif
+    #ifdef USE_EXTRA_LOW_MOON_CONFIG
+        use_extra_low_moon_e,
+    #endif
     #ifdef USE_STROBE_STATE
     strobe_type_e,
     #endif
