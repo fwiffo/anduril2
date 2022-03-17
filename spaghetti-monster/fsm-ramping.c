@@ -179,10 +179,10 @@ void set_level(uint8_t level) {
                 #endif
             }
         #endif
+        #ifdef USE_TINT_RAMPING
+        update_tint();
+        #endif
     }
-    #ifdef USE_TINT_RAMPING
-    update_tint();
-    #endif
 
     #ifdef PWM1_CNT
     prev_level = api_level;
@@ -359,13 +359,16 @@ void update_tint() {
 
     // disable the power channel, if relevant
     #ifdef LED_ENABLE_PIN
-    if (warm_PWM)
+    // Infers that if we've called update_tint, the flashlight is on, even if
+    // PWM1_LVL is zero. This mimics the behavior of single-channel lights
+    // which set LED_ENABLE_PIN inside set_level().
+    if (warm_PWM || (brightness == 0 && tint < 170))
         LED_ENABLE_PORT |= (1 << LED_ENABLE_PIN);
     else
         LED_ENABLE_PORT &= ~(1 << LED_ENABLE_PIN);
     #endif
     #ifdef LED2_ENABLE_PIN
-    if (cool_PWM)
+    if (cool_PWM || (brightness == 0 && tint >= 85))
         LED2_ENABLE_PORT |= (1 << LED2_ENABLE_PIN);
     else
         LED2_ENABLE_PORT &= ~(1 << LED2_ENABLE_PIN);
