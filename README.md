@@ -18,6 +18,27 @@ Adds THERM\_AUTOCALIBRATE\_TEMP config option for temperature to assume when
 autocalibrating the temperature sensor on factory reset (the area near my
 computer is warmer than the default 21 C).
 
+## Extra-low moonlight mode
+
+Set USE\_EXTRA\_MOON\_CONFIG to enable an "extra-low" moonlight option in the
+misc-config menu. When enabled, moonlight mode sets the light to the lowest
+available brightness, then enters low-power standby mode (as if the light was
+off) while leaving the LED channel enabled. Low-power mode can't be entered
+until the button is released, so the light initially comes on at normal
+moonlight brightness.
+
+For dual-channel lights, this produces a brightness level similar to
+single-channel lights. The brightness is flickery and unstable, and pulsates to
+"normal" moonlight levels whenever the light wakes up to do whatever
+maintainence like checking battery levels or diddling with AUX LEDs. It's also
+in normal moonlight brightness until the button is released.
+
+In extra-low moonlight, the light is not in ramp mode, so no ramp-mode actions
+are available. Single click turns off, and click-hold is a momentary "normal"
+moonlight. Also, it's not possible to enter standby while the button is
+depressed, so extra-low moonlight doesn't work in momentary mode or lockout
+mode.
+
 ## My default config
 
  - Default to Advanced UI after factory reset
@@ -30,3 +51,5 @@ computer is warmer than the default 21 C).
  - Sets manual ramp memory to middle brightness
  - Defaults AUX LEDs to battery mode and low brightness in OFF and LOCKOUT
  - Applies 0.5 gamma to tint autoramp curve to make middle levels cooler
+ - Sets PWM curve for tint-ramping lights to include 0
+ - Enables extra-low moonlight mode option for tint-ramping lights
