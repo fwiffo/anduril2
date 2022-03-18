@@ -24,10 +24,12 @@
 // (like...  during the middle of a strobe pulse)
 // set this to nonzero to enter standby mode next time the system is idle
 volatile uint8_t go_to_standby = 0;
-// This is a hacky way to do this.
-uint8_t skip_power_off_on_standby;
+// Passing options via global state is yucky, but...
+uint8_t power_off_on_standby = 1;
 
 #ifdef TICK_DURING_STANDBY
+uint8_t tick_during_standby = 1;
+
 #ifndef STANDBY_TICK_SPEED
 #define STANDBY_TICK_SPEED 3  // every 0.128 s
 /*

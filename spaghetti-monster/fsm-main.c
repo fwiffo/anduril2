@@ -160,9 +160,7 @@ int main() {
         // enter standby mode if requested
         // (works better if deferred like this)
         if (go_to_standby) {
-            if (skip_power_off_on_standby) {
-                skip_power_off_on_standby = 0;
-            } else {
+            if (power_off_on_standby) {
                 #ifdef USE_RAMPING
                 set_level(0);
                 #else
@@ -179,6 +177,8 @@ int main() {
                 PWM4_LVL = 255;  // inverted  :(
                 #endif
                 #endif
+            } else {
+                power_off_on_standby = 1;
             }
             standby_mode();
         }

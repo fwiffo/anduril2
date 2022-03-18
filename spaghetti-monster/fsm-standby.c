@@ -32,7 +32,12 @@
 void sleep_until_eswitch_pressed()
 {
     #ifdef TICK_DURING_STANDBY
-    WDT_slow();
+    if (tick_during_standby) {
+        WDT_slow();
+    } else {
+        WDT_off();
+        tick_during_standby = 1;
+    }
     #else
     WDT_off();
     #endif
