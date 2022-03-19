@@ -20,19 +20,24 @@ computer is warmer than the default 21 C).
 
 ## Extra-low moonlight mode
 
-Set USE\_EXTRA\_MOON\_CONFIG to enable an "extra-low" moonlight option in the
-misc-config menu. When enabled, moonlight mode sets the light to the lowest
-available brightness, then enters low-power standby mode (as if the light was
-off) while leaving the LED channel enabled. Low-power mode can't be entered
-until the button is released, so the light initially comes on at the normal
-lowest brightness level. For dual-channel lights, this produces a brightness
-level per-LED similar to single-channel lights, though it's fairly flickery.
+Set USE\_EXTRA\_MOON\_CONFIG to enable an experimental "extra-low" moonlight
+option in the misc-config menu. When enabled, moonlight mode sets the light to
+the lowest available brightness, then enters low-power standby mode (as if the
+light was off) while leaving the LED channel enabled. Low-power mode can't be
+entered until the button is released, so the light initially comes on at the
+normal lowest brightness level, then drops when the button is released.
 
-In extra-low moonlight, the light is not in ramp mode, so no ramp-mode actions
-are available. Single click turns off, and click-hold is a momentary "normal"
-moonlight. Also, it's not possible to enter standby while the button is
-depressed, so extra-low moonlight doesn't work in momentary mode or lockout
-mode. Ramping to floor from ramp mode is normal floor brightness, not standby.
+For dual-channel lights, this produces a brightness level per-LED similar to
+single-channel lights, though it's flickery and variable. Brightness will drop
+with battery level, and will stop working entirely at some point. Results will
+vary by emitter.
+
+In extra-low moonlight, the light is not in ramp mode, so most ramp-mode actions
+are not available. Single click turns off, and click-hold is a momentary
+"normal" moonlight. Tint ramping or channel switching is available with 3H as
+usual. Also, it's not possible to enter standby while the button is depressed,
+so extra-low moonlight doesn't work in momentary mode or lockout mode. Ramping
+to floor from ramp mode is normal floor brightness, not standby.
 
 ## My default config
 
