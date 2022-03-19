@@ -32,12 +32,16 @@
 void sleep_until_eswitch_pressed()
 {
     #ifdef TICK_DURING_STANDBY
+    #ifdef USE_EXTRA_LOW_MOON_CONFIG
     if (tick_during_standby) {
         WDT_slow();
     } else {
         WDT_off();
         tick_during_standby = 1;
     }
+    #else
+    WDT_slow();
+    #endif // ifdef USE_EXTRA_LOW_MOON_CONFIG
     #else
     WDT_off();
     #endif

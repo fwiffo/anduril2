@@ -160,7 +160,9 @@ int main() {
         // enter standby mode if requested
         // (works better if deferred like this)
         if (go_to_standby) {
+            #ifdef USE_EXTRA_LOW_MOON_CONFIG
             if (power_off_on_standby) {
+            #endif
                 #ifdef USE_RAMPING
                 set_level(0);
                 #else
@@ -177,9 +179,11 @@ int main() {
                 PWM4_LVL = 255;  // inverted  :(
                 #endif
                 #endif
+            #ifdef USE_EXTRA_LOW_MOON_CONFIG
             } else {
                 power_off_on_standby = 1;
             }
+            #endif
             standby_mode();
         }
 

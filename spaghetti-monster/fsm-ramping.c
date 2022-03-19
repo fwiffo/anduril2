@@ -23,7 +23,12 @@
 
 #ifdef USE_RAMPING
 
+#ifdef USE_JUMP_START
 void set_level_internal(uint8_t level) {
+#else
+void set_level(uint8_t level) {
+    actual_level = level;
+#endif
     #ifdef USE_SET_LEVEL_GRADUALLY
     gradual_target = level;
     #endif
@@ -362,8 +367,8 @@ void update_tint() {
 }
 #endif  // ifdef USE_TINT_RAMPING
 
+#ifdef USE_JUMP_START
 void set_level(uint8_t level) {
-    #ifdef USE_JUMP_START
     // maybe "jump start" the engine, if it's prone to slow starts
     // (pulse the output high for a moment to wake up the power regulator)
     // (only do this when starting from off and going to a low level)
@@ -372,10 +377,10 @@ void set_level(uint8_t level) {
         set_level_internal(jump_start_level);
         delay_4ms(JUMP_START_TIME/4);
     }
-    #endif  // ifdef USE_JUMP_START
     actual_level = level;
     set_level_internal(level);
 }
+#endif  // ifdef USE_JUMP_START
 
 #endif  // ifdef USE_RAMPING
 #endif  // ifndef FSM_RAMPING_C

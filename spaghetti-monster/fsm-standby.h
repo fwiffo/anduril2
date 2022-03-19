@@ -25,10 +25,14 @@
 // set this to nonzero to enter standby mode next time the system is idle
 volatile uint8_t go_to_standby = 0;
 // Passing options via global state is yucky, but...
+#ifdef USE_EXTRA_LOW_MOON_CONFIG
 uint8_t power_off_on_standby = 1;
+#endif
 
 #ifdef TICK_DURING_STANDBY
+#ifdef USE_EXTRA_LOW_MOON_CONFIG
 uint8_t tick_during_standby = 1;
+#endif
 
 #ifndef STANDBY_TICK_SPEED
 #define STANDBY_TICK_SPEED 3  // every 0.128 s
