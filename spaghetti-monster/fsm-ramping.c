@@ -287,7 +287,7 @@ void update_tint() {
     // and a global tint value
     //PWM_DATATYPE brightness = PWM_GET(pwm1_levels, level);
     uint16_t brightness = PWM1_LVL;
-    uint16_t warm_PWM, cool_PWM;
+    uint16_t chan1_PWM, chan2_PWM;
     #ifdef USE_DYN_PWM
         uint16_t top = PWM1_TOP;
         //uint16_t top = PWM_GET(pwm_tops, actual_level-1);
@@ -334,32 +334,32 @@ void update_tint() {
         if (base_PWM > (top << 1)) { base_PWM = top << 1; }
     #endif
 
-    cool_PWM = (((PWM_DATATYPE2)mytint * (PWM_DATATYPE2)base_PWM) + 127) / 255;
-    warm_PWM = base_PWM - cool_PWM;
+    chan2_PWM = (((PWM_DATATYPE2)mytint * (PWM_DATATYPE2)base_PWM) + 127) / 255;
+    chan1_PWM = base_PWM - chan2_PWM;
     // when running at > 100% power, spill extra over to other channel
-    if (cool_PWM > top) {
-        warm_PWM += (cool_PWM - top);
-        cool_PWM = top;
-    } else if (warm_PWM > top) {
-        cool_PWM += (warm_PWM - top);
-        warm_PWM = top;
+    if (chan2_PWM > top) {
+        chan1_PWM += (chan2_PWM - top);
+        chan2_PWM = top;
+    } else if (chan1_PWM > top) {
+        chan2_PWM += (chan1_PWM - top);
+        chan1_PWM = top;
     }
 
-    TINT1_LVL = warm_PWM;
-    TINT2_LVL = cool_PWM;
+    TINT1_LVL = chan1_PWM;
+    TINT2_LVL = chan2_PWM;
 
     // disable the power channel, if relevant
     #ifdef LED_ENABLE_PIN
     // Infers that if we've called update_tint, the flashlight is on, even if
     // PWM1_LVL is zero. This mimics the behavior of single-channel lights
     // which set LED_ENABLE_PIN inside set_level().
-    if (warm_PWM || (brightness == 0 && tint < 170))
+    if (chan1_PWM || (brightness == 0 && tint < 170))
         LED_ENABLE_PORT |= (1 << LED_ENABLE_PIN);
     else
         LED_ENABLE_PORT &= ~(1 << LED_ENABLE_PIN);
     #endif
     #ifdef LED2_ENABLE_PIN
-    if (cool_PWM || (brightness == 0 && tint >= 85))
+    if (chan2_PWM || (brightness == 0 && tint >= 85))
         LED2_ENABLE_PORT |= (1 << LED2_ENABLE_PIN);
     else
         LED2_ENABLE_PORT &= ~(1 << LED2_ENABLE_PIN);
