@@ -42,7 +42,6 @@ to floor from ramp mode is normal floor brightness, not standby.
 ## My default config
 
  - Default to Advanced UI after factory reset
- - Enable autolock by default at 20 minutes
  - Sets default autocalibrate temperature to 26 C
  - Disables party and tactical strobes and reduces default strobe brightness
  - Defaults to stepped ramping with 5 steps
