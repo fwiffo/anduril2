@@ -2,6 +2,9 @@
 
 Fork of ToyKeeper's Anduril 2 flashlight firmware
 
+**This is a fork of an old version from prior to the move to github. I've
+moved on to a fork of the newer version.**
+
 [Launchpad repository](https://code.launchpad.net/~toykeeper/flashlight-firmware/anduril2)
 
 ## New configuration options
